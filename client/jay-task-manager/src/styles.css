@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply mx-auto;
+  @apply w-6/12;
+}
+header {
+  @apply my-20 text-center font-bold;
+}
+
+header h1 {
+  @apply text-blueish-gray;
+}
+
+input {
+  @apply w-full text-xl text-blueish-gray outline-0 border-0 border-b border-blueish-gray p-5px mb-4;
+}
+
+.submit-task {
+  @apply text-dark-blue hover:text-white border border-dark-blue hover:bg-dark-blue focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800;
+}
