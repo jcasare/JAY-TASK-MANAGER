@@ -51,3 +51,18 @@ export const toggleTask = (taskID) => {
     }
   }
 }
+
+export const updateTask = (taskID, editedTask) => {
+  return async (dispatch) => {
+    dispatch({ type: actionTypes.UPDATE_TASK_REQUEST })
+    try {
+      const updatedTask = await apiRequests.updateTask(taskID, editedTask)
+      dispatch({ type: actionTypes.UPDATE_TASK_SUCCESS, payload: updatedTask })
+    } catch (error) {
+      dispatch({
+        type: actionTypes.UPDATE_TASK_FAILURE,
+        payload: error.message,
+      })
+    }
+  }
+}

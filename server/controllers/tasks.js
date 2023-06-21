@@ -15,21 +15,26 @@ const createTask = async (req, res) => {
 }
 
 const toggleTask = async (req, res) => {
-  const existingTask = await Task.findById(req.params.id)
   const toggledTask = await Task.findByIdAndUpdate(
     req.params.id,
     [{ $set: { completed: { $not: '$completed' } } }],
     { new: true }
   )
-  // const toggledTask = await Task.updateOne(
-  //   { _id: req.params.id },
-  //   { completed: !existingTask.completed },
-  //   { new: true }
-  // )
   console.log(toggledTask)
   res.status(200).json(toggledTask)
 }
-const updateTask = async (req, res) => {}
+const updateTask = async (req, res) => {
+  const {
+    body: { editedTask },
+    params: { id },
+  } = req
+  const updatedTask = await Task.findByIdAndUpdate(
+    id,
+    { task: editedTask },
+    { new: true }
+  )
+  res.status(201).json(updatedTask)
+}
 const deleteTask = async (req, res) => {}
 module.exports = {
   createTask,

@@ -7,10 +7,9 @@ const Tasks = () => {
   const loading = useSelector((state) => state.tasks.loading)
   const error = useSelector((state) => state.tasks.error)
   const dispatch = useDispatch()
-  const tasksArray = Array.from(tasks)
   useEffect(() => {
     dispatch(fetchTasks())
-  }, [dispatch])
+  }, [])
   if (loading) {
     return <div>Loading...</div>
   }
@@ -22,7 +21,7 @@ const Tasks = () => {
   return (
     <article className="grid">
       <ul>
-        {tasksArray.map((task) => (
+        {tasks.map((task) => (
           <Task key={task._id} task={task} />
         ))}
       </ul>

@@ -13,7 +13,7 @@ const TasksForm = () => {
       resetForm()
     },
   })
-  const handleSubmit = () => {}
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <input

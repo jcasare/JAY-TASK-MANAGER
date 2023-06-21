@@ -3,6 +3,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer utilities {
+  .min-w-85 {
+    min-width: 85%;
+  }
+  ,
+  .w-85 {
+    width: 85%;
+  }
+  .w-15 {
+    width: 15%;
+  }
+}
 
 body {
   @apply mx-auto;
@@ -25,9 +37,21 @@ input {
 }
 
 .task {
-  @apply p-4 m-5px overflow-x-hidden rounded-md cursor-pointer text-white bg-slate-700 items-center text-lg;
+  @apply p-4 m-5px overflow-x-hidden rounded-md cursor-pointer text-white bg-slate-700 flex  text-lg;
+}
+.task-text {
+  @apply w-85;
+}
+.task-icons {
+  @apply w-15 flex items-end justify-end gap-2;
+}
+.edit-form {
+  @apply w-full flex;
 }
 
+.edit-task {
+  @apply bg-transparent text-lg text-white my-auto w-85 border-b border-white pr-10;
+}
 .completed-task {
-  @apply line-through decoration-1 decoration-slate-300 decoration-solid;
+  @apply line-through decoration-2 decoration-slate-300 decoration-solid;
 }

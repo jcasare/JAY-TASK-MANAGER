@@ -32,7 +32,7 @@ const taskReducer = (state = initialState, action) => {
           ? { ...task, completed: !task.completed }
           : task
       )
-      console.log(updatedTasks)
+
       return {
         ...state,
         tasks: updatedTasks,
@@ -41,11 +41,12 @@ const taskReducer = (state = initialState, action) => {
     }
 
     case actionTypes.UPDATE_TASK_SUCCESS:
+      const updatedTasks = state.tasks.map((task) =>
+        task._id === action.payload._id ? { ...task, ...action.payload } : task
+      )
       return {
         ...state,
-        tasks: state.tasks.map((task) =>
-          task._id === action.payload.id ? action.payload._id : task
-        ),
+        tasks: updatedTasks,
         loading: false,
       }
     case actionTypes.DELETE_TASK_SUCCESS: {

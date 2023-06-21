@@ -23,15 +23,18 @@ export const createTask = async (task) => {
 export const toggleTask = async (task) => {
   try {
     const response = await axios.get(`${API_BASE_URL}/tasks/${task._id}`)
-    console.log(response.data)
+    // console.log(response.data)
     return response.data
   } catch (error) {
     throw error.response.data
   }
 }
-export const updateTask = async (task) => {
+export const updateTask = async (taskID, editedTask) => {
   try {
-    const response = await axios.patch(`${API_BASE_URL}/tasks/${task.id}`, task)
+    const response = await axios.patch(
+      `${API_BASE_URL}/tasks/${taskID}`,
+      editedTask
+    )
     return response.data
   } catch (error) {
     throw error.response.data
