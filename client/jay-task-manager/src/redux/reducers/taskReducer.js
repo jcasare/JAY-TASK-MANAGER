@@ -10,6 +10,7 @@ const taskReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_TASKS_REQUEST:
     case actionTypes.CREATE_TASK_REQUEST:
+    case actionTypes.TOGGLE_TASK_REQUEST:
     case actionTypes.UPDATE_TASK_REQUEST:
     case actionTypes.DELETE_TASK_REQUEST:
       return {
@@ -18,17 +19,27 @@ const taskReducer = (state = initialState, action) => {
         error: null,
       }
     case actionTypes.FETCH_TASKS_SUCCESS:
-      return {
-        ...state,
-        tasks: action.payload,
-        loading: false,
-      }
+      return { tasks: action.payload, loading: false }
     case actionTypes.CREATE_TASK_SUCCESS:
       return {
         ...state,
-        tasks: action.payload,
+        tasks: [...state.tasks, action.payload],
         loading: false,
       }
+    case actionTypes.TOGGLE_TASK_SUCCESS: {
+      const updatedTasks = state.tasks.map((task) =>
+        task._id === action.payload._id
+          ? { ...task, completed: !task.completed }
+          : task
+      )
+      console.log(updatedTasks)
+      return {
+        ...state,
+        tasks: updatedTasks,
+        loading: false,
+      }
+    }
+
     case actionTypes.UPDATE_TASK_SUCCESS:
       return {
         ...state,
@@ -48,6 +59,7 @@ const taskReducer = (state = initialState, action) => {
     case actionTypes.CREATE_TASK_FAILURE:
     case actionTypes.UPDATE_TASK_FAILURE:
     case actionTypes.DELETE_TASK_FAILURE:
+    case actionTypes.TOGGLE_TASK_FAILURE:
       return {
         ...state,
         loading: false,

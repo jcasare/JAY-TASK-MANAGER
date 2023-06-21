@@ -1,5 +1,5 @@
 import { useFormik } from 'formik'
-import { createTask } from '../redux/actions/taskActions'
+import { createTask, fetchTasks } from '../redux/actions/taskActions'
 import { useDispatch } from 'react-redux'
 const TasksForm = () => {
   const dispatch = useDispatch()
@@ -8,8 +8,7 @@ const TasksForm = () => {
       newTask: '',
     },
     onSubmit: async (values, { resetForm }) => {
-      const task = { task: values.newTask }
-
+      const task = { newTask: values.newTask }
       await dispatch(createTask(task))
       resetForm()
     },

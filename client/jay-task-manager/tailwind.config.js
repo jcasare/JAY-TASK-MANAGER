@@ -11,6 +11,9 @@ export default {
       padding: {
         '5px': '5px',
       },
+      margin: {
+        '5px': '5px',
+      },
     },
   },
   plugins: [],
