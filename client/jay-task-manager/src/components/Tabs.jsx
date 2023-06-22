@@ -5,6 +5,7 @@ const Tabs = ({ currentTab }) => {
   const dispatch = useDispatch()
   return TABS.map((tab) => (
     <button
+      key={tab}
       className={tab === currentTab ? 'tab-btn selected' : 'tab-btn '}
       onClick={() => dispatch(switchTabs(tab))}
     >
