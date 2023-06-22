@@ -1,17 +1,15 @@
 const Task = require('../model/Task')
-
+const { StatusCodes } = require('http-status-codes')
 const fetchAllTasks = async (req, res) => {
   const tasks = await Task.find({}).sort({ createdAt: -1 })
-  res.status(200).json(tasks)
+  res.status(StatusCodes.OK).json(tasks)
 }
 
 const createTask = async (req, res) => {
   currentDate = Date.now()
   const { newTask } = req.body
   const task = await Task.create({ task: newTask, createdAt: currentDate })
-  await task.save()
-  console.log(task)
-  res.status(201).json(task)
+  res.status(StatusCodes.CREATED).json(task)
 }
 
 const toggleTask = async (req, res) => {
@@ -20,8 +18,7 @@ const toggleTask = async (req, res) => {
     [{ $set: { completed: { $not: '$completed' } } }],
     { new: true }
   )
-  console.log(toggledTask)
-  res.status(200).json(toggledTask)
+  res.status(StatusCodes.CREATED).json(toggledTask)
 }
 const updateTask = async (req, res) => {
   const {
@@ -33,11 +30,11 @@ const updateTask = async (req, res) => {
     { task: editedTask },
     { new: true }
   )
-  res.status(201).json(updatedTask)
+  res.status(StatusCodes.CREATED).json(updatedTask)
 }
 const deleteTask = async (req, res) => {
   const deletedTask = await Task.findByIdAndDelete(req.params.id)
-  res.status(204).json(deletedTask)
+  res.status(StatusCodes.OK).json(deletedTask)
 }
 module.exports = {
   createTask,

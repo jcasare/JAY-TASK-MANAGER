@@ -1,5 +1,5 @@
 import { useFormik } from 'formik'
-import { createTask, fetchTasks } from '../redux/actions/taskActions'
+import { createTask } from '../redux/actions/taskActions'
 import { useDispatch } from 'react-redux'
 const TasksForm = () => {
   const dispatch = useDispatch()
