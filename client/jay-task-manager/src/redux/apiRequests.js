@@ -41,12 +41,9 @@ export const updateTask = async (taskID, editedTask) => {
   }
 }
 
-export const deleteTask = async (task) => {
+export const deleteTask = async (taskID) => {
   try {
-    const response = await axios.delete(
-      `${API_BASE_URL}/tasks/${task.id}`,
-      task
-    )
+    const response = await axios.delete(`${API_BASE_URL}/tasks/${taskID}`)
     return response.data
   } catch (error) {
     throw error.response.data

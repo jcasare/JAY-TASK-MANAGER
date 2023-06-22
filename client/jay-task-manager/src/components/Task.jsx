@@ -150,11 +150,13 @@ import {
   faUserPen,
 } from '@fortawesome/free-solid-svg-icons'
 import { useFormik } from 'formik'
-import { toggleTask, updateTask } from '../redux/actions/taskActions'
+import {
+  toggleTask,
+  updateTask,
+  deleteTask,
+} from '../redux/actions/taskActions'
 import { useDispatch } from 'react-redux'
 import { useState } from 'react'
-import React from 'react'
-
 const Task = ({ task }) => {
   const [editing, setEditing] = useState(false)
   const dispatch = useDispatch()
@@ -164,7 +166,6 @@ const Task = ({ task }) => {
     },
     onSubmit: async (values, { resetForm }) => {
       const editedTask = { editedTask: values.selectedTask }
-      //   console.log(editedTask, task._id)
       await dispatch(updateTask(task._id, editedTask))
       setEditing((prevState) => !prevState)
       resetForm()
@@ -215,6 +216,7 @@ const Task = ({ task }) => {
             icon={faTrashCan}
             beatFade
             style={{ float: 'right', padding: '5px' }}
+            onClick={() => dispatch(deleteTask(task._id))}
           />
         </div>
       )}

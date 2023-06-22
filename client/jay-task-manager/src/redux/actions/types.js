@@ -17,3 +17,10 @@ export const UPDATE_TASK_FAILURE = 'UPDATE_TASK_FAILURE'
 export const DELETE_TASK_REQUEST = 'DELETE_TASK_REQUEST'
 export const DELETE_TASK_SUCCESS = 'DELETE_TASK_SUCCESS'
 export const DELETE_TASK_FAILURE = 'DELETE_TASK_FAILURE'
+
+export const SWITCH_TAB = 'SWITCH_TAB'
+
+export const ALL_TASKS = 'All Tasks'
+export const ACTIVE_TASKS = 'Active Tasks'
+export const DONE_TASKS = 'Done Tasks'
+export const TABS = [ALL_TASKS, ACTIVE_TASKS, DONE_TASKS]

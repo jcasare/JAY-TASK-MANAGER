@@ -50,6 +50,7 @@ const taskReducer = (state = initialState, action) => {
         loading: false,
       }
     case actionTypes.DELETE_TASK_SUCCESS: {
+      console.log(action)
       return {
         ...state,
         tasks: state.tasks.filter((task) => task._id !== action.payload),

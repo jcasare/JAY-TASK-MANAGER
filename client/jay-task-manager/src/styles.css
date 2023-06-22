@@ -14,6 +14,9 @@
   .w-15 {
     width: 15%;
   }
+  .w-100px {
+    width: 100px;
+  }
 }
 
 body {
@@ -54,4 +57,11 @@ input {
 }
 .completed-task {
   @apply line-through decoration-2 decoration-slate-300 decoration-solid;
+}
+.selected {
+  @apply text-white bg-gray-400;
+}
+.tab-btn {
+  /* @apply p-10 text-lg text-blueish-gray cursor-pointer bg-white border-none w-100px; */
+  @apply mx-2.5 my-0  p-2.5 text-sm cursor-pointer bg-white text-blueish-gray border-none;
 }

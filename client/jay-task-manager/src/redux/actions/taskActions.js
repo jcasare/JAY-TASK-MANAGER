@@ -66,3 +66,22 @@ export const updateTask = (taskID, editedTask) => {
     }
   }
 }
+export const deleteTask = (taskID) => {
+  return async (dispatch) => {
+    dispatch({ type: actionTypes.DELETE_TASK_REQUEST })
+    try {
+      const deletedTask = await apiRequests.deleteTask(taskID)
+      dispatch({ type: actionTypes.DELETE_TASK_SUCCESS, payload: taskID })
+    } catch (error) {
+      dispatch({
+        type: actionTypes.DELETE_TASK_FAILURE,
+        payload: error.message,
+      })
+    }
+  }
+}
+export const switchTabs = (tab) => {
+  return async (dispatch) => {
+    dispatch({ type: actionTypes.SWITCH_TAB, selected: tab })
+  }
+}
