@@ -7,7 +7,6 @@ const morgan = require('morgan')
 const app = express()
 const port = process.env.PORT || 8000
 const tasksRouter = require('./routes/tasks')
-const xss = require('xss-clean')
 const notFound = require('./middleware/notFound')
 const errorHandler = require('./middleware/errorHandler')
 
@@ -15,13 +14,12 @@ app.set('trust proxy', 1)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
-app.use(xss())
+
 app.use(morgan('tiny'))
 app.disable('x-powered-by') //prevents attackers from seeing framework used
 
-//DB connection
 app.get('/', (req, res) => {
-  res.send('Welcome')
+  res.send('TaskQuake API')
 })
 
 app.use('/api/v1/tasks', tasksRouter)
