@@ -7,29 +7,36 @@ const morgan = require('morgan')
 const app = express()
 const port = process.env.PORT || 8000
 const tasksRouter = require('./routes/tasks')
+const xss = require('xss-clean')
+const notFound = require('./middleware/notFound')
+const errorHandler = require('./middleware/errorHandler')
+
+app.set('trust proxy', 1)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
+app.use(xss())
 app.use(morgan('tiny'))
 app.disable('x-powered-by') //prevents attackers from seeing framework used
 
-// app.listen(port, () => {
-//   console.log(`server listening on port ${port}...`)
-// })
 //DB connection
 app.get('/', (req, res) => {
   res.send('Welcome')
 })
 
 app.use('/api/v1/tasks', tasksRouter)
-connectDB()
-  .then(() => {
-    try {
-      app.listen(8000, () => {
-        console.log(`server is listening on port ${port}...`)
-      })
-    } catch (error) {
-      console.log(error)
-    }
-  })
-  .catch((err) => console.log('Cannot connect to DB'))
+
+app.use(notFound)
+app.use(errorHandler)
+
+const spinServer = async () => {
+  try {
+    await connectDB(process.env.MONGO_URI)
+    app.listen(port, () => {
+      console.log(`Server is listening on port ${port}...`)
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+spinServer()
