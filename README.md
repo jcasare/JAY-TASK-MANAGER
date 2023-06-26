@@ -1,2 +1,2 @@
 # JAY-TASK-MANAGER
-Working on docs and responsiveness now!
+Working on User Authentication, Site responsiveness, and Project Documentation
